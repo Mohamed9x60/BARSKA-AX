@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room - {{ server_name }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .chat-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.5em;
+        }
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #e9ecef;
+        }
+        .chat-form {
+            padding: 10px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+        }
+        .chat-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .chat-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+        .users-list {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #ddd;
+        }
+        .user-item {
+            padding: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        .user-item i {
+            color: #007bff;
+            margin-right: 5px;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container chat-container">
+        <div class="chat-header">
+            <span>PROMET</span>
+            <span style="font-size: 0.8em;">محمد فؤاد</span>
+            <button id="logoutButton" class="btn btn-danger btn-sm">تسجيل الخروج</button>
+        </div>
+        <div class="d-flex">
+            <div class="users-list col-3">
+                <h5>Active Users</h5>
+                <div id="activeUsers">
+                    <!-- سيتم ملؤها بأسماء المستخدمين المتصلين -->
+                </div>
+            </div>
+            <div class="chat-messages col-9" id="chatMessages">
+                <p class="text-muted">Welcome, {{ username }}! Start chatting...</p>
+            </div>
+        </div>
+        <form id="chatForm" class="chat-form">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button type="submit">Send</button>
+        </form>
+        <div class="footer-text">
+            <a href="https://www.google.com/search?q=%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86+%D8%AD%D8%B1%D8%A9&oq=%D9%81%D9%84%D8%B3%D8%B7%D9%8A+&gs_lcrp=EgZjaHJvbWUqCQgCEAAYDRiABDIGCAAQRRg5MgwIARAAGA0YsQMYgAQyCQgCEAAYDRiABDIMCAMQABgNGLEDGIAEMgkIBBAuGA0YgAQyCQgFEAAYDRiABDIJCAYQABgNGIAEMgkIBxAuGA0YgAQyCQgIEC4YDRiABDIJCAkQABgNGIAEMgkIChAAGA0YgAQyCQgLEAAYDRiABDIJCAwQLhgNGIAEMgkIDRAAGA0YgAQyCQgOEAAYDRiABNIBCTE5MDA5ajBqN6gCFLACAQ&client=tablet-android-samsung&sourceid=chrome-mobile&ie=UTF-8" target="_blank" style="color: red; font-size: 0.9em;">فلسطين حرة</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        const roomCode = "defaultRoom"; // تحديث هذا الكود حسب الرمز الخاص بالغرفة
+        const username = "{{ username }}";
+
+        socket.emit('join_room', { room_code: roomCode });
+
+        document.getElementById('chatForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = document.getElementById('messageInput').value;
+            socket.emit('send_message', { room_code: roomCode, message });
+            document.getElementById('messageInput').value = '';
+        });
+
+        socket.on('receive_message', function(data) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageElement = document.createElement('p');
+            messageElement.textContent = `${data.username}: ${data.message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        socket.on('update_users', function(users) {
+            const activeUsers = document.getElementById('activeUsers');
+            activeUsers.innerHTML = '';
+            users.forEach(user => {
+                const userItem = document.createElement('p');
+                userItem.className = 'user-item';
+                userItem.innerHTML = `<i class="fas fa-user"></i> ${user}`;
+                activeUsers.appendChild(userItem);
+            });
+        });
+
+        // Function to handle logout
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            socket.emit('leave_room', { room_code: roomCode });
+            window.location.href = '/logout'; // تعديل هذا الرابط حسب مسار صفحة تسجيل الخروج
+        });
+    </script>
+</body>
+</html>

@@ -1,1 +1,122 @@
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4a90e2, #f0f8ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
 
+        .welcome-message {
+            position: absolute;
+            top: 10px;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1.2em;
+            animation: fadeOut 3s ease-in-out 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: fadeIn 2s ease-in;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #4a90e2;
+        }
+
+        .banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4a90e2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            margin: 5px 0;
+            width: 200px;
+            justify-content: center;
+        }
+
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .social-link:hover {
+            background-color: #357ab8;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ff4b5c;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- رسالة ترحيب -->
+   <div class="welcome-message" style="direction: rtl; text-align: right;">مرحبا بك في PROMET!</div>
+
+  <h2 style="direction: rtl; text-align: right;">المبرمج: Mohamed Fouad</h2>
+   <h1 style="direction: rtl; text-align: right;">مرحبا بك في: PROMET</h1>
+     <div class="banner">
+        <!-- رابط فيسبوك مع أيقونة -->
+        <a href="https://www.facebook.com/profile.php?id=100014784496206&mibextid=ZbWKwL" class="social-link" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+            فيسبوك
+        </a>
+        <!-- رابط GitHub مع أيقونة -->
+        <a href="https://github.com/Mohamed9x60" class="social-link" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo">
+            GitHub
+        </a>
+    </div>
+
+    <!-- جعل "فلسطين حرة" رابطًا إلى بحث Google -->
+    <div class="footer">
+        <a href="https://www.google.com/search?q=%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86+%D8%AD%D8%B1%D8%A9&oq=%D9%81%D9%84%D8%B3%D8%B7%D9%8A+&gs_lcrp=EgZjaHJvbWUqCQgCEAAYDRiABDIGCAAQRRg5MgwIARAAGA0YsQMYgAQyCQgCEAAYDRiABDIMCAMQABgNGLEDGIAEMgkIBBAuGA0YgAQyCQgFEAAYDRiABDIJCAYQABgNGIAEMgkIBxAuGA0YgAQyCQgIEC4YDRiABDIJCAkQABgNGIAEMgkIChAAGA0YgAQyCQgLEAAYDRiABDIJCAwQLhgNGIAEMgkIDRAAGA0YgAQyCQgOEAAYDRiABNIBCTE5MDA5ajBqN6gCFLACAQ&client=tablet-android-samsung&sourceid=chrome-mobile&ie=UTF-8" target="_blank" style="color: #ff4b5c; text-decoration: none;">
+            فلسطين حرة
+        </a>
+    </div>
+
+    <a href="/login" class="social-link" style="background-color: #ff4b5c; color: #fff;">تسجيل الدخول</a>
+</body>
+</html>

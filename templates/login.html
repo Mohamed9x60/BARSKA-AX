@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        /* إعدادات الصفحة العامة */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4a90e2, #f0f8ff); /* خلفية متدرجة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* حاوية تسجيل الدخول */
+        .login-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* عنوان المشروع */
+        .project-title {
+            font-size: 26px;
+            color: #4a90e2;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        /* تنسيق الحقول */
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4a90e2;
+        }
+
+        label {
+            display: block;
+            text-align: right;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 30px); /* لضبط العرض مع الأيقونة */
+            padding: 10px;
+            padding-left: 30px; /* لإفساح مجال للأيقونة */
+            border: 1px solid #b2dfdb;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+            background-color: #f0f8ff;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        /* زر الدخول */
+        .login-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #357ab8;
+            transform: scale(1.05); /* تكبير عند التحويم */
+        }
+
+        /* رسالة خطأ */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- اسم المشروع -->
+        <div class="project-title">PROMET</div>
+        <h2>تسجيل الدخول</h2>
+
+        <!-- نموذج تسجيل الدخول -->
+        <form action="/login" method="POST">
+            <div class="input-container">
+                <i class="fas fa-user"></i>
+                <label for="username">اسم المستخدم:</label>
+                <input type="text" id="username" name="username" required placeholder="أدخل اسم المستخدم">
+            </div>
+
+            <div class="input-container">
+                <i class="fas fa-lock"></i>
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" name="password" required placeholder="********">
+            </div>
+
+            <button type="submit" class="login-btn">دخول</button>
+        </form>
+
+        <!-- رسالة خطأ عند الحاجة -->
+        <p class="error-message">{% if message %}{{ message }}{% endif %}</p>
+    </div>
+</body>
+</html>
