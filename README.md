@@ -38,7 +38,9 @@ Extracting .tar Files
 ```bash
 gunzip aap.bin.gz
 ```
-
+```bash
+chmod +x aap.bin
+```
  6.**Install Required Dependencies**
 Install the necessary packages by running the following command:
 ```bash
@@ -149,6 +151,9 @@ Extracting .tar Files
 # To extract the .tar file of this project, use:
 ```bash
 gunzip aap.bin.gz
+```
+```bash
+chmod +x aap.bin
 ```
 
 4. ***Install Python Dependencies***
