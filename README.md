@@ -23,19 +23,20 @@ pkg instal git && pkg install python3 -y
 3. **Clone the Repository**:
     ```bash
     git clone https://github.com/Mohamed9x60/BARSKA-AX.git
-    ```
-4. **Unzip the file, approximately 218 MB in size**:
+
+
+4.**Open the file**
+```bash
+cd BARSKA-AX
+```
+
+5. **Unzip the file, approximately 218 MB in size**:
 
 Extracting .tar Files
 
 # To extract the .tar file of this project, use:
 ```bash
-tar -xvf PROMET.tar BARSKA-AX
-```
-
-5.**Open the file**
-```bash
-cd BARSKA-AX
+gunzip aap.bin.gz
 ```
 
  6.**Install Required Dependencies**
@@ -136,19 +137,20 @@ Replace USERNAME and REPOSITORY with the GitHub username and repository name for
 git clone https://github.com/Mohamed9x60/BARSKA-AX.git
 ```
 
-4. **Unzip the file, approximately 218 MB in size**:
+3.**Open the file**
+```bash
+cd BARSKA-AX
+```
+
+4. **Unzip the file**:
 
 Extracting .tar Files
 
 # To extract the .tar file of this project, use:
 ```bash
-tar -xvf PROMET.tar BARSKA-AX
+gunzip aap.bin.gz
 ```
 
-5.**Open the file**
-```bash
-cd BARSKA-AX
-```
 4. ***Install Python Dependencies***
 ```bash
 pip install -r requirements.txt
