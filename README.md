@@ -30,9 +30,9 @@ pkg instal git && pkg install python3 -y
 cd BARSKA-AX
 ```
 
-5. **Unzip the file, approximately 218 MB in size**:
+5. **Unzip the file**:
 
-Extracting .tar Files
+Extracting .gz Files
 
 # To extract the .tar file of this project, use:
 ```bash
@@ -146,7 +146,7 @@ cd BARSKA-AX
 
 4. **Unzip the file**:
 
-Extracting .tar Files
+Extracting .gz Files
 
 # To extract the .tar file of this project, use:
 ```bash
