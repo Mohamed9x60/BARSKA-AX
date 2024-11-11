@@ -79,7 +79,7 @@ def login():
             if ip_attempts[user_ip] >= 3:
                 banned_ips.add(user_ip)
                 save_banned_ip(user_ip)
-                return "تم حظرك بسبب محاولات الدخول الفاشلة المتكررة."
+                return " تم حظرك بسبب محاولات الدخول الفاشلة المتكرر."
 
     return render_template('login.html')
 
