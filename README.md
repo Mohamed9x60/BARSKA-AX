@@ -23,7 +23,7 @@ pkg instal git && pkg install python3 -y
 3. **Clone the Repository**:
     ```bash
     git clone https://github.com/Mohamed9x60/BARSKA-AX.git
-
+    ```
 
 4.**Open the file**
    ```bash
@@ -32,7 +32,7 @@ pkg instal git && pkg install python3 -y
 
 5.**Run code**
 ```bach
-python3 BARSKA-AX.py
+python3 BARSKA_AX.py
 ```
 
  6.**Install Required Dependencies**
@@ -135,7 +135,7 @@ cd BARSKA-AX
 
 4. **Run cod**
   ```bash
-   python3 BARSKA-AX.py
+   python3 BARSKA_AX.py
   ```
 
 4. ***Install Python Dependencies***
