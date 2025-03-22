@@ -45,7 +45,10 @@
         }
         .list-group-item {
             border: none;
-            padding: 5px 0;
+            padding: 10px;
+        }
+        .list-group-item ul {
+            padding-left: 20px;
         }
         .main-panel {
             flex: 1;
@@ -59,72 +62,44 @@
             padding: 0;
         }
         .file-list li {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-radius: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .file-list li a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .file-list li a:hover {
-            text-decoration: underline;
-        }
-        .action-btn {
-            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
         .btn-action {
             margin-left: 5px;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-        .btn-warning {
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
-        .btn-warning:hover {
-            background-color: #e0a800;
-            border-color: #d39e00;
         }
     </style>
 </head>
 <body>
     <div class="container admin-container">
         <!-- رأس الصفحة -->
-        <div class="admin-header d-flex justify-content-between align-items-center">
+        <div class="admin-header">
             <h2>لوحة الأدمن</h2>
             <div>
                 <span>{{ username }}</span>
                 <a href="{{ url_for('chat') }}" class="btn btn-primary btn-sm ms-2">
-                    <i class="fas fa-comments"></i> الانتقال إلى المحادثات
+                    <i class="fas fa-comments"></i> المحادثات
                 </a>
                 <button id="logoutButton" class="btn btn-danger btn-sm ms-2">
-                    <span style="font-size: 0.8em;">محمد فؤاد</span>
-            <button id="logoutButton" class="btn btn-danger btn-sm">تسجيل الخروج</button>
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
                 </button>
             </div>
         </div>
+
         <!-- المحتوى الرئيسي -->
         <div class="admin-content">
             <!-- الشريط الجانبي -->
             <div class="sidebar">
                 <h5>المستخدمين النشطين</h5>
-                <ul class="list-group" id="activeUsers">
+                <ul class="list-group">
                     {% for channel, users in channels.items() %}
                         <li class="list-group-item">
                             <strong>الغرفة:</strong> {{ channel }}
-                            <br>
-                            <small>المستخدمون:</small>
                             <ul>
                                 {% for user in users %}
                                     <li>
@@ -141,17 +116,19 @@
                         </li>
                     {% endfor %}
                 </ul>
+
                 <h5 class="mt-4">العناوين المحظورة</h5>
-                <ul class="list-group" id="bannedIps">
+                <ul class="list-group">
                     {% for ip in banned_ips %}
                         <li class="list-group-item"><i class="fas fa-ban"></i> {{ ip }}</li>
                     {% endfor %}
                 </ul>
             </div>
+
             <!-- اللوحة الرئيسية -->
             <div class="main-panel">
                 <div class="file-upload">
-                    <h4>رفع ملف إلى النظام</h4>
+                    <h4>رفع ملف</h4>
                     <form action="/upload" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <input type="file" name="file" class="form-control" required>
@@ -161,6 +138,7 @@
                         </button>
                     </form>
                 </div>
+
                 <div class="file-list">
                     <h4>الملفات المرفوعة</h4>
                     <ul>
@@ -184,17 +162,14 @@
     <script>
         const socket = io();
 
-        // تسجيل الخروج
         document.getElementById('logoutButton').addEventListener('click', function() {
             window.location.href = '/logout';
         });
 
-        // طرد مستخدم
         function kickUser(username, roomCode) {
-            if (confirm(`هل تريد طرد ${username} من الغرفة؟`)) {
-                fetch(`/kick_user?username=${username}&room_code=${roomCode}`, {
-                    method: 'POST'
-                }).then(response => {
+            if (confirm(`هل تريد طرد ${username}؟`)) {
+                fetch(`/kick_user?username=${username}&room_code=${roomCode}`, { method: 'POST' })
+                .then(response => {
                     if (response.ok) {
                         alert(`تم طرد ${username} بنجاح.`);
                         location.reload();
@@ -203,12 +178,10 @@
             }
         }
 
-        // حظر مستخدم
         function banUser(username) {
             if (confirm(`هل تريد حظر ${username}؟`)) {
-                fetch(`/ban_user?username=${username}`, {
-                    method: 'POST'
-                }).then(response => {
+                fetch(`/ban_user?username=${username}`, { method: 'POST' })
+                .then(response => {
                     if (response.ok) {
                         alert(`تم حظر ${username} بنجاح.`);
                         location.reload();
@@ -217,12 +190,10 @@
             }
         }
 
-        // حذف ملف
         function deleteFile(filename) {
             if (confirm(`هل تريد حذف الملف ${filename}؟`)) {
-                fetch(`/delete_file?filename=${filename}`, {
-                    method: 'POST'
-                }).then(response => {
+                fetch(`/delete_file?filename=${filename}`, { method: 'POST' })
+                .then(response => {
                     if (response.ok) {
                         alert(`تم حذف الملف ${filename} بنجاح.`);
                         location.reload();
@@ -230,30 +201,6 @@
                 });
             }
         }
-
-        // تحديث قائمة المستخدمين النشطين
-        socket.on('update_users', function(users) {
-            const activeUsers = document.getElementById('activeUsers');
-            activeUsers.innerHTML = '';
-            users.forEach(user => {
-                const userItem = document.createElement('p');
-                userItem.className = 'user-item';
-                userItem.innerHTML = `<i class="fas fa-user"></i> ${user}`;
-                activeUsers.appendChild(userItem);
-            });
-        });
-
-        // تحديث قائمة العناوين المحظورة
-        socket.on('update_banned_ips', function(bannedIps) {
-            const bannedIpsList = document.getElementById('bannedIps');
-            bannedIpsList.innerHTML = '';
-            bannedIps.forEach(ip => {
-                const ipItem = document.createElement('li');
-                ipItem.className = 'list-group-item';
-                ipItem.innerHTML = `<i class="fas fa-ban"></i> ${ip}`;
-                bannedIpsList.appendChild(ipItem);
-            });
-        });
     </script>
 </body>
 </html>
