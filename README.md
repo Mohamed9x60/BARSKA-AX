@@ -26,32 +26,21 @@ pkg instal git && pkg install python3 -y
 
 
 4.**Open the file**
-```bash
-cd BARSKA-AX
+   ```bash
+     cd BARSKA-AX
+   ```
+
+5.**Ren code**
+```bach
+python3 BARSKA-AX.py
 ```
 
-5. **Unzip the file**:
-
-Extracting .gz Files
-
-# To extract the .tar file of this project, use:
-```bash
-gunzip aap.bin.gz
-```
-```bash
-chmod +x aap.bin
-```
  6.**Install Required Dependencies**
 Install the necessary packages by running the following command:
 ```bash
 pip install -r requirements.txt
 ```
 
-7.**Run the Application**
-Use the following command to start the application:
-```bash
-./aap.bin
-```
 
 ---
 
@@ -107,7 +96,7 @@ ngrok http http://127.0.0.1:5000
 
 Or, specify a different port:
 ```bash
-ngrok http 8080
+ngrok http 5000
 ```
 
 3. Access the Public Link
@@ -144,17 +133,10 @@ git clone https://github.com/Mohamed9x60/BARSKA-AX.git
 cd BARSKA-AX
 ```
 
-4. **Unzip the file**:
-
-Extracting .gz Files
-
-# To extract the .tar file of this project, use:
-```bash
-gunzip aap.bin.gz
-```
-```bash
-chmod +x aap.bin
-```
+4. **REN cod**
+  ```bash
+   python3 BARSKA-AX.py
+  ```
 
 4. ***Install Python Dependencies***
 ```bash
