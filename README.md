@@ -30,7 +30,7 @@ pkg instal git && pkg install python3 -y
      cd BARSKA-AX
    ```
 
-5.**Ren code**
+5.**Run code**
 ```bach
 python3 BARSKA-AX.py
 ```
@@ -133,7 +133,7 @@ git clone https://github.com/Mohamed9x60/BARSKA-AX.git
 cd BARSKA-AX
 ```
 
-4. **REN cod**
+4. **Run cod**
   ```bash
    python3 BARSKA-AX.py
   ```
