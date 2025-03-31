@@ -1,10 +1,10 @@
 Flask==2.3.2
 Flask-SocketIO==5.3.4
 Flask-Limiter==2.8.1
-Werkzeug==2.3.6
+Werkzeug==3.0.6
 colorama==0.4.6
 Flask-Session==0.5.0
 celery==5.3.1
 redis==4.5.5
 python-socketio==5.8.0
-eventlet==0.33.3
+eventlet==0.35.2
